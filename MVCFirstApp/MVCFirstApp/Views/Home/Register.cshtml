@@ -1,0 +1,71 @@
+﻿@model MVCFirstApp.Models.Customer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+    <div class="form-horizontal">
+        <h4>Customer</h4>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                Your Name:
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-10">
+                Your email:
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                Your phone number:
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" , required = "required" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                Will you attend?
+                @Html.DropDownListFor(model => model.Attends,
+                  new List<SelectListItem> {
+                       new SelectListItem { Value = "none" , Text = "Select an option" },
+                       new SelectListItem { Value = "yes" , Text = "Yes, absolute" },
+                       new SelectListItem { Value = "no" , Text = "No, maybe next time" }
+                    },
+                  new { @class = "myselect", required = "required" })
+
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+</body>
+</html>
